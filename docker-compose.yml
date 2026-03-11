@@ -1,20 +1,30 @@
-version: '3'
 services:
-  app:
-    build: .
-    env_file:
-      - .env
+  redis:
+    image: redis:7
+    restart: always
     volumes:
-      - ./index.js:/app/index.js
-      - ./mailer.js:/app/mailer.js
-      - ./api.js:/app/api.js
-      - ./test-sender.js:/app/test-sender.js
-      - ./package.json:/app/package.json
-      - ./template.json:/app/template.json
-    ports:
-      - "3800:3000"
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+
+  worker:
+    build: .
+    restart: always
+    env_file: .env
+    command: node queueWorker.js
     depends_on:
       - redis
 
-  redis:
-    image: redis:7
+  api:
+    build: .
+    restart: always
+    env_file: .env
+    ports:
+      - "3800:3000"
+    command: node api.js
+    depends_on:
+      - redis
+
+volumes:
+  redis_data:

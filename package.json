@@ -7,6 +7,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "bullmq": "^5.70.4",
     "dayjs": "^1.11.13",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
@@ -16,5 +17,17 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfios/email-auto-reply.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dfios/email-auto-reply/issues"
+  },
+  "homepage": "https://github.com/dfios/email-auto-reply#readme",
+  "description": ""
 }
